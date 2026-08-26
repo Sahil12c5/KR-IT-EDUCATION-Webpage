@@ -156,10 +156,10 @@ const Hero = () => {
                 </div>
 
                 {/* Decorative floating badges */}
-                <div className="absolute -right-2 sm:-right-6 top-10 sm:top-20 bg-white text-slate-900 px-3 py-1.5 sm:px-4 sm:py-2 rounded-2xl shadow-xl font-bold flex items-center gap-2 animate-bounce text-xs sm:text-base" style={{ animationDuration: '3s' }}>
+                <div className="absolute -right-2 sm:-right-6 -top-5 sm:top-10 md:top-20 bg-white text-slate-900 px-3 py-1.5 sm:px-4 sm:py-2 rounded-2xl shadow-xl font-bold flex items-center gap-2 animate-bounce text-xs sm:text-base" style={{ animationDuration: '3s' }}>
                   <Star className="text-yellow-500 fill-current" size={16} /> 4.9/5 Rating
                 </div>
-                <div className="absolute -left-2 sm:-left-8 bottom-10 sm:bottom-20 bg-brand-orange text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-2xl shadow-xl font-bold flex items-center gap-2 animate-bounce text-xs sm:text-base" style={{ animationDuration: '4s', animationDelay: '1s' }}>
+                <div className="absolute -left-2 sm:-left-8 -bottom-5 sm:bottom-10 md:bottom-20 bg-brand-orange text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-2xl shadow-xl font-bold flex items-center gap-2 animate-bounce text-xs sm:text-base" style={{ animationDuration: '4s', animationDelay: '1s' }}>
                   <Users size={16} /> 5k+ Learners
                 </div>
               </div>
