@@ -695,6 +695,34 @@ const Testimonials = () => {
 };
 
 const Contact = ({ selectedCourse, onCourseChange }) => {
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    const formData = new FormData(e.target);
+    
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+      
+      const data = await response.json();
+      if (data.success) {
+        alert("Message sent successfully!");
+        e.target.reset();
+        if (onCourseChange) onCourseChange("");
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      alert("Error submitting the form.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-24 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
       <div className="container mx-auto px-6">
@@ -751,7 +779,7 @@ const Contact = ({ selectedCourse, onCourseChange }) => {
           <div className="lg:w-3/5 p-6 md:p-10 lg:p-16">
             <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white mb-8">Send us a message</h3>
 
-            <form action="https://api.web3forms.com/submit" method="POST" className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <input type="hidden" name="access_key" value="1d334cb2-ddae-42a1-89eb-6965f68deb18" />
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
@@ -791,8 +819,8 @@ const Contact = ({ selectedCourse, onCourseChange }) => {
                 <textarea name="message" required rows="4" placeholder="How can we help you?" className="w-full px-5 py-4 rounded-xl border border-slate-200 dark:border-slate-800 dark:bg-slate-900 dark:text-white focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20 outline-none transition-all resize-none"></textarea>
               </div>
 
-              <button type="submit" className="w-full bg-brand-purple text-white py-4 rounded-xl font-bold text-lg hover:bg-slate-900 dark:hover:bg-brand-orange transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 mt-4">
-                Submit
+              <button type="submit" disabled={isSubmitting} className="w-full bg-brand-purple text-white py-4 rounded-xl font-bold text-lg hover:bg-slate-900 dark:hover:bg-brand-orange transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 mt-4 disabled:opacity-70 disabled:cursor-not-allowed">
+                {isSubmitting ? 'Submitting...' : 'Submit'}
               </button>
             </form>
           </div>
