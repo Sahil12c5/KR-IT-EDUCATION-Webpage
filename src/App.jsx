@@ -602,13 +602,13 @@ const Programs = ({ onSelectCourse }) => {
 
           <div
             ref={scrollRef}
-            className={`flex gap-8 py-4 px-4 pr-8 ${activeFilter || searchQuery ? 'flex-wrap justify-center overflow-x-visible' : 'overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'}`}
+            className={`flex gap-8 py-4 px-4 pr-8 ${activeFilter || searchQuery ? 'flex-wrap justify-center overflow-x-visible' : 'overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] [-webkit-overflow-scrolling:touch]'}`}
           >
             {(activeFilter || searchQuery ? filteredCourses : [...filteredCourses, ...filteredCourses]).map((course, idx) => (
               <div
                 key={idx}
                 id={idx < (activeFilter || searchQuery ? filteredCourses.length : courses.length) ? `course-card-${course.name.replace(/\s+/g, '-').toLowerCase()}` : undefined}
-                className="w-[85vw] sm:w-80 md:w-[22rem] max-w-full flex-shrink-0 bg-white dark:bg-slate-900 rounded-[32px] group relative overflow-hidden p-6 md:p-8 flex flex-col h-full card-glow-hover cursor-pointer shadow-xl border border-slate-100 dark:border-slate-800"
+                className="w-[85vw] sm:w-80 md:w-[22rem] max-w-full flex-shrink-0 bg-white dark:bg-slate-900 rounded-[32px] group relative overflow-hidden p-6 md:p-8 flex flex-col h-full card-glow-hover cursor-pointer shadow-xl border border-slate-100 dark:border-slate-800 transform-gpu"
                 style={{
                   borderTop: `6px solid ${course.hex}`,
                   '--glow-color': course.hex,
