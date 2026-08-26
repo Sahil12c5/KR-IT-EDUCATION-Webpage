@@ -752,7 +752,7 @@ const Contact = ({ selectedCourse, onCourseChange }) => {
             <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white mb-8">Send us a message</h3>
 
             <form action="https://api.web3forms.com/submit" method="POST" className="space-y-6">
-              <input type="hidden" name="access_key" value="12e6d81c-a420-487c-a5cc-f0fc2cd242b8" />
+              <input type="hidden" name="access_key" value="1d334cb2-ddae-42a1-89eb-6965f68deb18" />
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Full Name</label>
