@@ -1,0 +1,94 @@
+@import "tailwindcss";
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Exact K/R IT Education Theme */
+  --color-brand-primary: #1688C4;
+  --color-brand-dark: #075985;
+  --color-brand-navy: #0F2740;
+  --color-brand-light: #38BDF8;
+
+  --color-bg-white: #FFFFFF;
+  --color-bg-soft: #F7FBFE;
+  --color-bg-blue: #EFF8FF;
+
+  --color-text-main: #172033;
+  --color-text-sec: #64748B;
+
+  --color-brand-border: #D9EAF4;
+  --color-accent-gold: #F5B942;
+  
+  /* Fallbacks for existing Tailwind utilities used in the UI */
+  --color-brand-purple: #1688C4; /* Map old purple to primary blue */
+  --color-brand-orange: #38BDF8; /* Map old orange to light blue */
+  --color-brand-blue: #0F2740;   /* Map old dark blue to navy */
+  
+  --color-slate-50: #FFFFFF;
+  --color-slate-100: #EFF8FF;
+  --color-slate-200: #D9EAF4;
+  --color-slate-600: #64748B;
+  --color-slate-800: #075985;
+  --color-slate-900: #172033;
+  --color-slate-950: #0F2740;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-slate-50);
+  color: var(--color-slate-900);
+}
+
+/* Animations */
+@keyframes fall {
+  0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.3; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+.animate-fall {
+  animation: fall linear infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.card-glow-hover {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.card-glow-hover:hover {
+  box-shadow: inset 0 0 30px var(--glow-color), 0 0 15px var(--glow-color);
+}
+
+/* Custom utility classes */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.text-gradient {
+  background: linear-gradient(to right, var(--color-brand-purple), var(--color-brand-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
