@@ -8,6 +8,17 @@ import {
 } from 'lucide-react';
 import { FaYoutube, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
+// Helper to scroll directly to the contact form on mobile/smartphones or when targeted
+export const scrollToContact = (forceForm = false) => {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+  const target = (isMobile || forceForm)
+    ? (document.getElementById('contact-form') || document.getElementById('contact'))
+    : document.getElementById('contact');
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
 // --- Components ---
 
 const Navbar = ({ isScrolled, isMobileMenuOpen, setIsMobileMenuOpen, darkMode, setDarkMode }) => (
@@ -35,7 +46,7 @@ const Navbar = ({ isScrolled, isMobileMenuOpen, setIsMobileMenuOpen, darkMode, s
           {darkMode ? <Sun size={20} /> : <Moon size={20} />}
         </button>
         <button
-          onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+          onClick={() => scrollToContact(true)}
           className="bg-brand-orange hover:bg-brand-purple text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
         >
           Book Free Demo
@@ -60,14 +71,25 @@ const Navbar = ({ isScrolled, isMobileMenuOpen, setIsMobileMenuOpen, darkMode, s
     {isMobileMenuOpen && (
       <div className="xl:hidden absolute top-full left-0 right-0 bg-white dark:bg-slate-900 shadow-xl py-4 flex flex-col items-center gap-4 border-t border-slate-100 dark:border-slate-800">
         {['Home', 'About', 'Services', 'Programs', 'Testimonials', 'Contact'].map((item) => (
-          <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} onClick={() => setIsMobileMenuOpen(false)} className="text-slate-700 dark:text-slate-300 font-medium text-lg">
+          <a
+            key={item}
+            href={`#${item.toLowerCase().replace(' ', '-')}`}
+            onClick={(e) => {
+              setIsMobileMenuOpen(false);
+              if (item === 'Contact') {
+                e.preventDefault();
+                scrollToContact(true);
+              }
+            }}
+            className="text-slate-700 dark:text-slate-300 font-medium text-lg"
+          >
             {item}
           </a>
         ))}
         <button
           onClick={() => {
             setIsMobileMenuOpen(false);
-            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+            scrollToContact(true);
           }}
           className="bg-brand-orange text-white px-8 py-3 rounded-full font-medium w-4/5 mt-2"
         >
@@ -126,7 +148,7 @@ const Hero = () => {
                 Explore Courses <ChevronRight size={20} />
               </button>
               <button
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => scrollToContact(true)}
                 className="w-full sm:w-auto bg-brand-orange text-white border-2 border-brand-orange hover:bg-brand-orange/80 px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
                 Book Free Demo
@@ -633,7 +655,7 @@ const Programs = ({ onSelectCourse }) => {
                   <button
                     onClick={() => {
                       if (onSelectCourse) onSelectCourse(course.name);
-                      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                      scrollToContact(true);
                     }}
                     className="w-full py-3 rounded-full text-sm font-bold transition-all flex items-center justify-center gap-2 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 group-hover:bg-brand-purple group-hover:text-white"
                   >
@@ -776,7 +798,7 @@ const Contact = ({ selectedCourse, onCourseChange }) => {
           </div>
 
           {/* Form Side */}
-          <div className="lg:w-3/5 p-6 md:p-10 lg:p-16">
+          <div id="contact-form" className="lg:w-3/5 p-6 md:p-10 lg:p-16 scroll-mt-24">
             <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white mb-8">Send us a message</h3>
 
             <form onSubmit={handleSubmit} className="space-y-6">
